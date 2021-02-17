@@ -62,4 +62,33 @@ inquirer
 			response.office
 		);
 		console.log(manager);
+		menu();
 	});
+
+function menu() {
+	inquirer
+		.prompt([
+			{
+				type: 'list',
+				name: 'menu',
+				message: 'What would you like to do next?',
+				choices: [
+					'Add an engineer',
+					'Add an intern',
+					'All done - generate my team profile',
+				],
+			},
+		])
+		.then((response) => {
+			switch (response.menu) {
+				case 'Add an engineer':
+					createEngineer();
+					break;
+				case 'Add an intern':
+					createIntern();
+					break;
+				case 'All done - generate my team profile':
+					generateProfile();
+			}
+		});
+}

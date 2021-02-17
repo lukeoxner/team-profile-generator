@@ -1,6 +1,7 @@
 // set up our required Node modules
 const fs = require('fs');
 const inquirer = require('inquirer');
+// const { inherits } = require('util');
 
 class Manager {
 	constructor(name, id, email, office) {
@@ -17,6 +18,15 @@ class Engineer {
 		this.email = email;
 		this.id = id;
 		this.github = github;
+	}
+}
+
+class Intern {
+	constructor(name, id, email, school) {
+		this.name = name;
+		this.email = email;
+		this.id = id;
+		this.school = school;
 	}
 }
 

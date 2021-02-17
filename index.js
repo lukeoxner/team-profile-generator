@@ -3,6 +3,11 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 // const { inherits } = require('util');
 
+let manager1;
+const engineers = [];
+const interns = [];
+
+// declare manager class
 class Manager {
 	constructor(name, id, email, office) {
 		this.name = name;
@@ -12,6 +17,7 @@ class Manager {
 	}
 }
 
+// declare engineer class
 class Engineer {
 	constructor(name, id, email, github) {
 		this.name = name;
@@ -21,6 +27,7 @@ class Engineer {
 	}
 }
 
+// declare intern class
 class Intern {
 	constructor(name, id, email, school) {
 		this.name = name;
@@ -31,40 +38,43 @@ class Intern {
 }
 
 // use inquirer to prompt user for Manager inputs
-inquirer
-	.prompt([
-		{
-			type: 'input',
-			name: 'name',
-			message: 'What is the name of the manager?',
-		},
-		{
-			type: 'input',
-			name: 'id',
-			message: 'What is their ID number?',
-		},
-		{
-			type: 'input',
-			name: 'email',
-			message: 'What is their email address?',
-		},
-		{
-			type: 'input',
-			name: 'office',
-			message: 'What is their office number?',
-		},
-	])
-	.then((response) => {
-		const manager = new Manager(
-			response.name,
-			response.id,
-			response.email,
-			response.office
-		);
-		console.log(manager);
-		menu();
-	});
+function createManager() {
+	inquirer
+		.prompt([
+			{
+				type: 'input',
+				name: 'name',
+				message: 'What is the name of the manager?',
+			},
+			{
+				type: 'input',
+				name: 'id',
+				message: 'What is their ID number?',
+			},
+			{
+				type: 'input',
+				name: 'email',
+				message: 'What is their email address?',
+			},
+			{
+				type: 'input',
+				name: 'office',
+				message: 'What is their office number?',
+			},
+		])
+		.then((response) => {
+			manager1 = new Manager(
+				response.name,
+				response.id,
+				response.email,
+				response.office
+			);
+			console.log(manager1);
+			menu();
+		});
+}
 
+// create function to enable main menu choices
 function menu() {
 	inquirer
 		.prompt([
@@ -92,3 +102,23 @@ function menu() {
 			}
 		});
 }
+
+// declare function used for creating a new engineer
+function createEngineer() {
+	console.log('time to make an engineer!');
+	menu();
+}
+
+// declare function used for creating a new intern
+function createIntern() {
+	console.log('time to make an intern!');
+	menu();
+}
+
+// declare function used for generating the team profile
+function generateProfile() {
+	console.log('time to generate a profile!');
+}
+
+// Kick everything off by calling the createManager function
+createManager();

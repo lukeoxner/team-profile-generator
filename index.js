@@ -3,7 +3,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 // const { inherits } = require('util');
 
-let manager1;
+let manager;
 const engineers = [];
 const interns = [];
 
@@ -11,8 +11,8 @@ const interns = [];
 class Manager {
 	constructor(name, id, email, office) {
 		this.name = name;
-		this.email = email;
 		this.id = id;
+		this.email = email;
 		this.office = office;
 	}
 }
@@ -21,8 +21,8 @@ class Manager {
 class Engineer {
 	constructor(name, id, email, github) {
 		this.name = name;
-		this.email = email;
 		this.id = id;
+		this.email = email;
 		this.github = github;
 	}
 }
@@ -31,8 +31,8 @@ class Engineer {
 class Intern {
 	constructor(name, id, email, school) {
 		this.name = name;
-		this.email = email;
 		this.id = id;
+		this.email = email;
 		this.school = school;
 	}
 }
@@ -63,13 +63,12 @@ function createManager() {
 			},
 		])
 		.then((response) => {
-			manager1 = new Manager(
+			manager = new Manager(
 				response.name,
 				response.id,
 				response.email,
 				response.office
 			);
-			console.log(manager1);
 			menu();
 		});
 }
@@ -105,14 +104,78 @@ function menu() {
 
 // declare function used for creating a new engineer
 function createEngineer() {
-	console.log('time to make an engineer!');
-	menu();
+	inquirer
+		.prompt([
+			{
+				type: 'input',
+				name: 'name',
+				message: 'What is the name of the engineer?',
+			},
+			{
+				type: 'input',
+				name: 'id',
+				message: 'What is their ID number?',
+			},
+			{
+				type: 'input',
+				name: 'email',
+				message: 'What is their email?',
+			},
+			{
+				type: 'input',
+				name: 'github',
+				message: 'What is their GitHub username?',
+			},
+		])
+		.then((response) => {
+			let engineer = new Engineer(
+				response.name,
+				response.id,
+				response.email,
+				response.github
+			);
+			engineers.push(engineer);
+			console.log(engineers);
+			menu();
+		});
 }
 
 // declare function used for creating a new intern
 function createIntern() {
-	console.log('time to make an intern!');
-	menu();
+	inquirer
+		.prompt([
+			{
+				type: 'input',
+				name: 'name',
+				message: 'What is the name of the intern?',
+			},
+			{
+				type: 'input',
+				name: 'id',
+				message: 'What is their ID number?',
+			},
+			{
+				type: 'input',
+				name: 'email',
+				message: 'What is their email address?',
+			},
+			{
+				type: 'input',
+				name: 'school',
+				message: 'What is their school?',
+			},
+		])
+		.then((response) => {
+			let intern = new Intern(
+				response.name,
+				response.id,
+				response.email,
+				response.school
+			);
+			interns.push(intern);
+			console.log(interns);
+			menu();
+		});
 }
 
 // declare function used for generating the team profile

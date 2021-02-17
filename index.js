@@ -3,11 +3,20 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 
 class Manager {
-	constructor(name, email, id, office) {
+	constructor(name, id, email, office) {
 		this.name = name;
 		this.email = email;
 		this.id = id;
 		this.office = office;
+	}
+}
+
+class Engineer {
+	constructor(name, id, email, github) {
+		this.name = name;
+		this.email = email;
+		this.id = id;
+		this.github = github;
 	}
 }
 
@@ -21,13 +30,13 @@ inquirer
 		},
 		{
 			type: 'input',
-			name: 'email',
-			message: 'What is their email address?',
+			name: 'id',
+			message: 'What is their ID number?',
 		},
 		{
 			type: 'input',
-			name: 'id',
-			message: 'What is their ID number?',
+			name: 'email',
+			message: 'What is their email address?',
 		},
 		{
 			type: 'input',
@@ -38,8 +47,8 @@ inquirer
 	.then((response) => {
 		const manager = new Manager(
 			response.name,
-			response.email,
 			response.id,
+			response.email,
 			response.office
 		);
 		console.log(manager);

@@ -8,6 +8,7 @@ const inquirer = require('inquirer');
 let manager;
 const engineers = [];
 const interns = [];
+const htmlArray = [];
 
 // declare manager class
 class Manager {
@@ -186,12 +187,11 @@ function generateProfile() {
 	addEngineers();
 	addInterns();
 	endingHTML();
+	writeHTML();
 }
 
 function startingHTML() {
-	fs.writeFile(
-		'team-profile.html',
-		`<!DOCTYPE html>
+	let startHTML = `<!DOCTYPE html>
 		<html lang="en">
 		<head>
 		<meta charset="UTF-8">
@@ -264,18 +264,16 @@ function startingHTML() {
 							<li class="list-group-item"><span class="key">Office: </span>${manager.office}</li>
 						</ul>
 					</div>
-		`,
-		(err) =>
-			// If there is an error, console log it. Otherwise, console log a success message
-			err ? console.error(err) : console.log('Team Profile initiated...')
-	);
+		`;
+
+	htmlArray.push(startHTML);
+	console.log('Starting HTML added!');
 }
 
 function addEngineers() {
 	if (engineers.length > 0) {
-		let data = '';
-		data = engineers.forEach((engineer) => {
-			`<div class="col-12 col-md-6 col-lg-4 card m-3 p-0" style="width: 18rem;">
+		engineers.forEach((engineer) => {
+			let engineerHTML = `<div class="col-12 col-md-6 col-lg-4 card m-3 p-0" style="width: 18rem;">
 			<div class="card-header">
 				<h5 class="card-title">${engineer.name}</h5>
 				<h6 class="card-text">Engineer</h6>
@@ -285,24 +283,50 @@ function addEngineers() {
 				<li class="list-group-item"><span class="key">Email: </span><a href="mailto:${engineer.email}">${engineer.email}</a></li>
 				<li class="list-group-item"><span class="key">GitHub: </span><a href="https://github.com/${engineer.github}">${engineer.github}</a></li>
 			</ul>
-		</div>`;
-		});
+			</div>`;
 
-		fs.appendFile('team-profile.html', data, (err) =>
-			err ? console.error(err) : console.log('Adding engineers...')
-		);
+			htmlArray.push(engineerHTML);
+		});
+		console.log('Engineers added!');
+	}
+}
+
+function addInterns() {
+	if (interns.length > 0) {
+		interns.forEach((intern) => {
+			let internHTML = `<div class="col-12 col-md-6 col-lg-4 card m-3 p-0" style="width: 18rem;">
+			<div class="card-header">
+				<h5 class="card-title">${intern.name}</h5>
+				<h6 class="card-text">Intern</h6>
+			</div>
+			<ul class="list-group list-group m-4">
+				<li class="list-group-item"><span class="key">ID: </span>${intern.id}</li>
+				<li class="list-group-item"><span class="key">Email: </span><a href="mailto:${intern.email}">${intern.email}</a></li>
+				<li class="list-group-item"><span class="key">School: </span>${intern.school}</li>
+			</ul>
+			</div>`;
+
+			htmlArray.push(internHTML);
+		});
+		console.log('Interns added!');
 	}
 }
 
 function endingHTML() {
-	let ending = `</div>
+	let endHTML = `</div>
 	</div>
 	</main>
 	</body>
 	</html>`;
 
-	fs.appendFile('team-profile.html', ending, (err) =>
-		err ? console.error(err) : console.log('Team profile complete!')
+	htmlArray.push(endHTML);
+	console.log('Ending HTML added!');
+}
+
+function writeHTML() {
+	fs.writeFile('team-profile.html', htmlArray.join(''), (err) =>
+		// If there is an error, console log it. Otherwise, console log a success message
+		err ? console.error(err) : console.log('Team Profile generated!')
 	);
 }
 

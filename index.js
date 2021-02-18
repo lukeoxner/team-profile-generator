@@ -138,7 +138,6 @@ function createEngineer() {
 				response.github
 			);
 			engineers.push(engineer);
-			console.log(engineers);
 			menu();
 		});
 }

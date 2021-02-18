@@ -182,11 +182,18 @@ function createIntern() {
 
 // declare function used for generating the team profile
 function generateProfile() {
+	startingHTML();
+	addEngineers();
+	addInterns();
+	endingHTML();
+}
+
+function startingHTML() {
 	fs.writeFile(
 		'team-profile.html',
 		`<!DOCTYPE html>
-	<html lang="en">
-	<head>
+		<html lang="en">
+		<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -229,9 +236,9 @@ function generateProfile() {
 	
 		</style>
 	
-	</head>
+		</head>
 	
-	<body>
+		<body>
 		<header>
 			<div class="container">
 				<div class="row py-5 mb-5">
@@ -248,50 +255,54 @@ function generateProfile() {
 	
 					<div class="col-12 col-md-6 col-lg-4 card m-3 p-0" style="width: 18rem;">
 						<div class="card-header">
-							<h5 class="card-title">Elon</h5>
+							<h5 class="card-title">${manager.name}</h5>
 							<h6 class="card-text">Manager</h6>
 						</div>
 						<ul class="list-group list-group m-4">
-							<li class="list-group-item"><span class="key">ID: </span>1</li>
-							<li class="list-group-item"><span class="key">Email: </span><a href="mailto:elon@spacex.com">elon@spacex.com</a></li>
-							<li class="list-group-item"><span class="key">Office: </span>1</li>
+							<li class="list-group-item"><span class="key">ID: </span>${manager.id}</li>
+							<li class="list-group-item"><span class="key">Email: </span><a href="mailto:${manager.email}">${manager.email}</a></li>
+							<li class="list-group-item"><span class="key">Office: </span>${manager.office}</li>
 						</ul>
 					</div>
-	
-					<div class="col-12 col-md-6 col-lg-4 card m-3 p-0" style="width: 18rem;">
-						<div class="card-header">
-							<h5 class="card-title">Franklin</h5>
-							<h6 class="card-text">Engineer</h6>
-						</div>
-						<ul class="list-group list-group m-4">
-							<li class="list-group-item"><span class="key">ID: </span>2</li>
-							<li class="list-group-item"><span class="key">Email: </span><a href="mailto:franklin@spacex.com">franklin@spacex.com</a></li>
-							<li class="list-group-item"><span class="key">GitHub: </span><a href="https://github.com/franklinthedev">FranklinTheDev</a></li>
-						</ul>
-					</div>
-					
-					<div class="col-12 col-md-6 col-lg-4 card m-3 p-0" style="width: 18rem;">
-						<div class="card-header">
-							<h5 class="card-title">Ryan</h5>
-							<h6 class="card-text">Intern</h6>
-						</div>
-						<ul class="list-group list-group m-4">
-							<li class="list-group-item"><span class="key">ID: </span>3</li>
-							<li class="list-group-item"><span class="key">Email: </span><a href="mailto:ryan@spacex.com">ryan@spacex.com</a></li>
-							<li class="list-group-item"><span class="key">School: </span>University of Denver</li>
-						</ul>
-					</div>
-	
-				</div>
-			</div>
-		</main>
-	
-	
-	</body>
-	</html>`,
+		`,
 		(err) =>
 			// If there is an error, console log it. Otherwise, console log a success message
-			err ? console.error(err) : console.log('Team Profile generated!')
+			err ? console.error(err) : console.log('Team Profile initiated...')
+	);
+}
+
+function addEngineers() {
+	if (engineers.length > 0) {
+		let data = '';
+		data = engineers.forEach((engineer) => {
+			`<div class="col-12 col-md-6 col-lg-4 card m-3 p-0" style="width: 18rem;">
+			<div class="card-header">
+				<h5 class="card-title">${engineer.name}</h5>
+				<h6 class="card-text">Engineer</h6>
+			</div>
+			<ul class="list-group list-group m-4">
+				<li class="list-group-item"><span class="key">ID: </span>${engineer.id}</li>
+				<li class="list-group-item"><span class="key">Email: </span><a href="mailto:${engineer.email}">${engineer.email}</a></li>
+				<li class="list-group-item"><span class="key">GitHub: </span><a href="https://github.com/${engineer.github}">${engineer.github}</a></li>
+			</ul>
+		</div>`;
+		});
+
+		fs.appendFile('team-profile.html', data, (err) =>
+			err ? console.error(err) : console.log('Adding engineers...')
+		);
+	}
+}
+
+function endingHTML() {
+	let ending = `</div>
+	</div>
+	</main>
+	</body>
+	</html>`;
+
+	fs.appendFile('team-profile.html', ending, (err) =>
+		err ? console.error(err) : console.log('Team profile complete!')
 	);
 }
 

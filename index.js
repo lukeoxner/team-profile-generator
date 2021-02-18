@@ -2,15 +2,14 @@
 const { profile } = require('console');
 const fs = require('fs');
 const inquirer = require('inquirer');
-// const { inherits } = require('util');
 
-// declare globals to store manager, engineers, interns
+// declare globals to store manager, engineers, interns, and the HTML pieces we'll generate later
 let manager;
 const engineers = [];
 const interns = [];
 const htmlArray = [];
 
-// declare manager class
+// declare manager class & its constructor function
 class Manager {
 	constructor(name, id, email, office) {
 		this.name = name;
@@ -20,7 +19,7 @@ class Manager {
 	}
 }
 
-// declare engineer class
+// declare engineer class & its constructor function
 class Engineer {
 	constructor(name, id, email, github) {
 		this.name = name;
@@ -30,7 +29,7 @@ class Engineer {
 	}
 }
 
-// declare intern class
+// declare intern class & its constructor function
 class Intern {
 	constructor(name, id, email, school) {
 		this.name = name;
@@ -66,6 +65,7 @@ function createManager() {
 			},
 		])
 		.then((response) => {
+			// create new object from Manager class
 			manager = new Manager(
 				response.name,
 				response.id,
@@ -131,12 +131,14 @@ function createEngineer() {
 			},
 		])
 		.then((response) => {
+			// create new Engineer object
 			let engineer = new Engineer(
 				response.name,
 				response.id,
 				response.email,
 				response.github
 			);
+			// push the new Engineer object to the engineers array
 			engineers.push(engineer);
 			menu();
 		});
@@ -168,19 +170,20 @@ function createIntern() {
 			},
 		])
 		.then((response) => {
+			// create new Intern object
 			let intern = new Intern(
 				response.name,
 				response.id,
 				response.email,
 				response.school
 			);
+			// push new Intern object to interns array
 			interns.push(intern);
-			console.log(interns);
 			menu();
 		});
 }
 
-// declare function used for generating the team profile
+// declare function used for kicking off all the other functions needed to create our HTML document
 function generateProfile() {
 	startingHTML();
 	addEngineers();
@@ -189,6 +192,7 @@ function generateProfile() {
 	writeHTML();
 }
 
+// declare function to add the starting HTML code to HTML array
 function startingHTML() {
 	let startHTML = `<!DOCTYPE html>
 		<html lang="en">
@@ -266,9 +270,9 @@ function startingHTML() {
 		`;
 
 	htmlArray.push(startHTML);
-	console.log('Starting HTML added!');
 }
 
+// declare function used to add engineer blocks to HTML array
 function addEngineers() {
 	if (engineers.length > 0) {
 		engineers.forEach((engineer) => {
@@ -286,10 +290,10 @@ function addEngineers() {
 
 			htmlArray.push(engineerHTML);
 		});
-		console.log('Engineers added!');
 	}
 }
 
+// declare function used to add intern blocks to HTML array
 function addInterns() {
 	if (interns.length > 0) {
 		interns.forEach((intern) => {
@@ -307,7 +311,6 @@ function addInterns() {
 
 			htmlArray.push(internHTML);
 		});
-		console.log('Interns added!');
 	}
 }
 
@@ -319,9 +322,9 @@ function endingHTML() {
 	</html>`;
 
 	htmlArray.push(endHTML);
-	console.log('Ending HTML added!');
 }
 
+// declare function that uses fs.writeFile to generate our HTML document
 function writeHTML() {
 	fs.writeFile('team-profile.html', htmlArray.join(''), (err) =>
 		// If there is an error, console log it. Otherwise, console log a success message

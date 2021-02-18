@@ -2,7 +2,6 @@
 const { profile } = require('console');
 const fs = require('fs');
 const inquirer = require('inquirer');
-const emailValidator = require('email-validator');
 
 // declare globals to store manager, engineers, interns, and the HTML pieces we'll generate later
 let manager;

@@ -2,6 +2,7 @@
 const { profile } = require('console');
 const fs = require('fs');
 const inquirer = require('inquirer');
+const emailValidator = require('email-validator');
 
 // declare globals to store manager, engineers, interns, and the HTML pieces we'll generate later
 let manager;
@@ -314,6 +315,7 @@ function addInterns() {
 	}
 }
 
+// declare function used to add the closing HTML code to HTML array
 function endingHTML() {
 	let endHTML = `</div>
 	</div>
@@ -324,7 +326,7 @@ function endingHTML() {
 	htmlArray.push(endHTML);
 }
 
-// declare function that uses fs.writeFile to generate our HTML document
+// declare function that uses fs.writeFile to generate our HTML document from HTML array
 function writeHTML() {
 	fs.writeFile('team-profile.html', htmlArray.join(''), (err) =>
 		// If there is an error, console log it. Otherwise, console log a success message

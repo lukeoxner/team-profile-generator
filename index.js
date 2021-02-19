@@ -9,13 +9,40 @@ const engineers = [];
 const interns = [];
 const htmlArray = [];
 
-// declare manager class & its constructor function
-class Manager {
-	constructor(name, id, email, office) {
+// declare Employee class, its constructor function, and methods
+class Employee {
+	constructor(name, id, email) {
 		this.name = name;
 		this.id = id;
 		this.email = email;
+	}
+
+	getName() {
+		return this.name;
+	}
+
+	getId() {
+		return this.id;
+	}
+
+	getEmail() {
+		return this.email;
+	}
+
+	getRole() {
+		return 'Employee';
+	}
+}
+
+// declare manager class & its constructor function
+class Manager extends Employee {
+	constructor(name, id, email, office) {
+		super(name, id, email);
 		this.office = office;
+	}
+
+	getRole() {
+		return 'Manager';
 	}
 }
 

@@ -1,6 +1,5 @@
 // requiring in our Engineer.js file
-const Engineer = require('../Engineer');
-const Manager = require('../Engineer');
+const Engineer = require('../lib/Engineer');
 
 describe('Engineer class', () => {
 	// first test

@@ -1,5 +1,5 @@
 // requiring in our Manager.js file
-const Manager = require('../Manager');
+const Manager = require('../lib/Manager');
 
 describe('Manager class', () => {
 	// first test

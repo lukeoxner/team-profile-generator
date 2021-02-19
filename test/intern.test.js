@@ -1,5 +1,5 @@
 // require in Intern.js
-const Intern = require('../Intern');
+const Intern = require('../lib/Intern');
 
 describe('Intern class', () => {
 	// first test

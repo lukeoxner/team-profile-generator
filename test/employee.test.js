@@ -1,4 +1,4 @@
-// requiring in our index.js file
+// requiring in our Employee.js file
 const Employee = require('../Employee');
 
 describe('Employee class', () => {

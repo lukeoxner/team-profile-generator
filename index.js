@@ -34,11 +34,15 @@ class Employee {
 	}
 }
 
-// declare manager class & its constructor function
+// declare manager class, constructor function, and methods
 class Manager extends Employee {
-	constructor(name, id, email, office) {
+	constructor(name, id, email, officeNumber) {
 		super(name, id, email);
-		this.office = office;
+		this.officeNumber = officeNumber;
+	}
+
+	getOffice() {
+		return this.officeNumber;
 	}
 
 	getRole() {
@@ -46,23 +50,35 @@ class Manager extends Employee {
 	}
 }
 
-// declare engineer class & its constructor function
-class Engineer {
+// declare engineer class, constructor function, and methods
+class Engineer extends Employee {
 	constructor(name, id, email, github) {
-		this.name = name;
-		this.id = id;
-		this.email = email;
+		super(name, id, email);
 		this.github = github;
+	}
+
+	getGithub() {
+		return this.github;
+	}
+
+	getRole() {
+		return 'Engineer';
 	}
 }
 
-// declare intern class & its constructor function
-class Intern {
+// declare intern class, constructor function, and methods
+class Intern extends Employee {
 	constructor(name, id, email, school) {
-		this.name = name;
-		this.id = id;
-		this.email = email;
+		super(name, id, email);
 		this.school = school;
+	}
+
+	getSchool() {
+		return this.school;
+	}
+
+	getRole() {
+		return 'Intern';
 	}
 }
 
@@ -87,7 +103,7 @@ function createManager() {
 			},
 			{
 				type: 'input',
-				name: 'office',
+				name: 'officeNumber',
 				message: 'What is their office number?',
 			},
 		])
@@ -97,7 +113,7 @@ function createManager() {
 				response.name,
 				response.id,
 				response.email,
-				response.office
+				response.officeNumber
 			);
 			menu();
 		});

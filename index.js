@@ -307,7 +307,7 @@ function startingHTML() {
 						<ul class="list-group list-group m-4">
 							<li class="list-group-item"><span class="key">ID: </span>${manager.id}</li>
 							<li class="list-group-item"><span class="key">Email: </span><a href="mailto:${manager.email}">${manager.email}</a></li>
-							<li class="list-group-item"><span class="key">Office: </span>${manager.office}</li>
+							<li class="list-group-item"><span class="key">Office: </span>${manager.officeNumber}</li>
 						</ul>
 					</div>
 		`;

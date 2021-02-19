@@ -258,7 +258,7 @@ function addEngineers() {
 			<ul class="list-group list-group m-4">
 				<li class="list-group-item"><span class="key">ID: </span>${engineer.id}</li>
 				<li class="list-group-item"><span class="key">Email: </span><a href="mailto:${engineer.email}">${engineer.email}</a></li>
-				<li class="list-group-item"><span class="key">GitHub: </span><a href="https://github.com/${engineer.github}">${engineer.github}</a></li>
+				<li class="list-group-item"><span class="key">GitHub: </span><a href="https://github.com/${engineer.github}" target="blank">${engineer.github}</a></li>
 			</ul>
 			</div>`;
 

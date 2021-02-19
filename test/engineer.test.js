@@ -21,4 +21,13 @@ describe('Engineer class', () => {
 			expect(engineer.getGithub()).toEqual(github);
 		});
 	});
+
+	// third test
+	describe('getRole method', () => {
+		it('Should return engineer role', () => {
+			const engineer = new Engineer();
+
+			expect(engineer.getRole()).toEqual('Engineer');
+		});
+	});
 });

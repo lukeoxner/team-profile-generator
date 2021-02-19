@@ -25,7 +25,7 @@ To run the tests I created for the project, simply enter 'npm run test' in the t
 
 The code (and associated assets) are hosted right here in this GitHub repository. Because there isn't any kind of browser interface for this project, it's not hosted live on the web anywhere like my projects usually are. However, I did film a walk-through video that shows the functionality of the application. You can view that video here:
 
-<a href="" target="blank"><b>Team Profile Generator Video Walk-Through</b></a>
+<a href="https://www.youtube.com/watch?v=SNphp11RE68" target="blank"><b>Team Profile Generator Video Walk-Through</b></a>
 <br><br>
 
 ## Credits

@@ -1,12 +1,12 @@
 // requiring in our index.js file
 const Employee = require('../app');
 
-describe('Employee', () => {
+describe('Employee class', () => {
 	describe('Initialization', () => {
 		it('Should create new employee', () => {
-			const test = new Employee();
+			const employee = new Employee();
 
-			expect('name' in test).toEqual(true);
+			expect('name' in employee).toEqual(true);
 		});
 	});
 });

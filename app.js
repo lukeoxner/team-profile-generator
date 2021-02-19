@@ -2,85 +2,16 @@
 const { profile } = require('console');
 const fs = require('fs');
 const inquirer = require('inquirer');
+const Employee = require('./Employee');
+const Manager = require('./Manager');
+const Engineer = require('./Engineer');
+const Intern = require('./Intern');
 
 // declare globals to store manager, engineers, interns, and the HTML pieces we'll generate later
 let manager;
 const engineers = [];
 const interns = [];
 const htmlArray = [];
-
-// declare Employee class, its constructor function, and methods
-class Employee {
-	constructor(name, id, email) {
-		this.name = name;
-		this.id = id;
-		this.email = email;
-	}
-
-	getName() {
-		return this.name;
-	}
-
-	getId() {
-		return this.id;
-	}
-
-	getEmail() {
-		return this.email;
-	}
-
-	getRole() {
-		return 'Employee';
-	}
-}
-
-// declare manager class, constructor function, and methods
-class Manager extends Employee {
-	constructor(name, id, email, officeNumber) {
-		super(name, id, email);
-		this.officeNumber = officeNumber;
-	}
-
-	getOffice() {
-		return this.officeNumber;
-	}
-
-	getRole() {
-		return 'Manager';
-	}
-}
-
-// declare engineer class, constructor function, and methods
-class Engineer extends Employee {
-	constructor(name, id, email, github) {
-		super(name, id, email);
-		this.github = github;
-	}
-
-	getGithub() {
-		return this.github;
-	}
-
-	getRole() {
-		return 'Engineer';
-	}
-}
-
-// declare intern class, constructor function, and methods
-class Intern extends Employee {
-	constructor(name, id, email, school) {
-		super(name, id, email);
-		this.school = school;
-	}
-
-	getSchool() {
-		return this.school;
-	}
-
-	getRole() {
-		return 'Intern';
-	}
-}
 
 // use inquirer to prompt user for Manager inputs
 function createManager() {
